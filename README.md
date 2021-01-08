@@ -5,15 +5,21 @@ Initialize terraform
 $ terraform init
 ```
 
-Preview changes
+Apply [or preview] changes
 ```
-$ terraform plan -var="bucket=my-bucket" -var="pgp_key_path=/path/to/public/key"
+$ terraform apply [or plan] -var="bucket=my-bucket" -var="pgp_key_path=/path/to/public/key"
 ```
 
-Apply changes
+Instead of specifying variables as arguments you can bundle them in a file
 ```
-$ terraform apply
+$ terraform apply -var-file example.tfvars -auto-approve
 ```
+
+And to get rid of all resources:
+```
+$ terraform destroy -var-file example.tfvars
+```
+
 
 
 ## More about your public key
@@ -25,6 +31,7 @@ $ gpg --export <email> > /path/to/public/key
 
 After `apply`, you can access the secret
 ```
+$ export GPG_TTY=$(tty)
 $ terraform output iam_access_key_secret | tr -d '"' | base64 --decode | gpg --decrypt
 ```
 
