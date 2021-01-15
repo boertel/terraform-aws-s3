@@ -12,12 +12,12 @@ $ terraform apply [or plan] -var="bucket=my-bucket" -var="pgp_key_path=/path/to/
 
 Instead of specifying variables as arguments you can bundle them in a file
 ```
-$ terraform apply -var-file example.tfvars -auto-approve
+$ terraform apply -var-file vars/example.tfvars -auto-approve
 ```
 
 And to get rid of all resources:
 ```
-$ terraform destroy -var-file example.tfvars
+$ terraform destroy -var-file vars/example.tfvars
 ```
 
 
